@@ -27,7 +27,7 @@ module.exports = {
           preview: true,
         },
         {
-          spotId: 4,
+          spotId: 3,
           url: "https://www.tinyurl.com/home",
           preview: false,
         },
@@ -42,7 +42,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        spotId: { [Op.in]: [1, 2, 3, 4] },
+        spotId: { [Op.in]: [1, 2, 3] },
       },
       {}
     );
