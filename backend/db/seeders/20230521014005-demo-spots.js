@@ -29,11 +29,11 @@ module.exports = {
           city: "Atlanta",
           state: "GA",
           country: "USA",
-          lat: 36.41,
+          lat: 36.4168,
           lng: -73.3657,
           name: "The spot",
           description: "Big burger place",
-          price: 5000,
+          price: 50,
         },
         {
           ownerId: 3,
