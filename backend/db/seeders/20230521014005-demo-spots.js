@@ -47,6 +47,18 @@ module.exports = {
           description: "Biggest club around",
           price: 500,
         },
+        {
+          ownerId: 3,
+          address: "123 mango st",
+          city: "Sarasota",
+          state: "FL",
+          country: "USA",
+          lat: 64.4723,
+          lng: 39.4318,
+          name: "The beach",
+          description: "Biggest beaches you'll ever see",
+          price: 10,
+        },
       ],
       {}
     );
