@@ -49,8 +49,8 @@ router.get("/current", requireAuth, async (req, res) => {
     where: { ownerId: req.user.id },
     attributes: {
       include: [
-        [fn("AVG", col("Reviews.stars")), "avgRating"],
-        [fn("MAX", col("SpotImages.url")), "previewImage"],
+        [Sequelize.fn("AVG", Sequelize.col("Reviews.stars")), "avgRating"],
+        [Sequelize.fn("MAX", Sequelize.col("SpotImages.url")), "previewImage"],
       ],
     },
     include: [
