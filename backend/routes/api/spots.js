@@ -22,7 +22,8 @@ router.get("/", async (req, res) => {
     attributes: [
       "spotId",
       [Sequelize.fn("AVG", Sequelize.col("stars")), "stars"],
-    ],
+    ], 
+    group: ["spotId"]
   });
   const previews = await SpotImage.findAll();
   const Spots = spots.map((spot) => {
@@ -93,6 +94,7 @@ router.get("/:spotId", async (req, res) => {
   const owner = await User.findOne({
     where: { id: spot.ownerId },
     attributes: ["id", "firstName", "lastName"],
+    as: "Owner"
   });
   const numReviews = reviews.length;
   const avgStarRating =
