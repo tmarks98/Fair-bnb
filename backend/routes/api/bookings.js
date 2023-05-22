@@ -41,7 +41,11 @@ const getToday = () => {
 };
 
 router.put("/:bookingId", requireAuth, async (req, res) => {
-  const booking = await Booking.findByPk(req.params.bookingId);
+  const booking = await Booking.findOne({
+    where: {
+      id: req.params.bookingId,
+    },
+  });
   throwIfNull(booking, "Booking");
   checkAuthorization(booking.userId === req.user.id);
   await validBooking(
