@@ -45,34 +45,21 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/current", requireAuth, async (req, res) => {
-  const userId = req.user.id;
-  const spots = await Spot.findAll({
-    where: {
-      ownerId: userId,
+  const Spots = await Spot.findAll({
+    where: { ownerId: req.user.id },
+    attributes: {
+      include: [
+        [fn("AVG", col("Reviews.stars")), "avgRating"],
+        [fn("MAX", col("SpotImages.url")), "previewImage"],
+      ],
     },
-  });
-  const ratings = await Review.findAll({
-    attributes: [
-      "spotId",
-      [Sequelize.fn("AVG", Sequelize.col("stars")), "stars"],
+    include: [
+      { model: SpotImage, attributes: [] },
+      { model: Review, attributes: [] },
     ],
+    group: ["Spot.id"],
   });
-  const previews = await SpotImage.findAll();
-  const Spots = spots.map((spot) => {
-    const avgRatingObj = ratings.find((rating) => {
-      return rating.spotId === spot.id;
-    });
-    const avgRating = avgRatingObj ? avgRatingObj.stars : null;
-    const previewImageObj = previews.find((preview) => {
-      return preview.spotId === spot.id;
-    });
-    const previewImage = previewImageObj ? previewImageObj.url : null;
-    return {
-      ...spot.toJSON(),
-      avgRating,
-      previewImage,
-    };
-  });
+
   res.json({ Spots });
 });
 
