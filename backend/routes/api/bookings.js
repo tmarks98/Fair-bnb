@@ -45,6 +45,15 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     where: {
       id: req.params.bookingId,
     },
+    attributes: [
+      "id",
+      "userId",
+      "startDate",
+      "endDate",
+      "spotId",
+      "createdAt",
+      "updatedAt",
+    ],
   });
   throwIfNull(booking, "Booking");
   checkAuthorization(booking.userId === req.user.id);
