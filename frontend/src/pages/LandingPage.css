@@ -1,0 +1,16 @@
+.gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.previews {
+    display: flex;
+    justify-content: space-between;
+}
+
+.location {
+    display: flex;
+}

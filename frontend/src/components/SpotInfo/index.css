@@ -1,0 +1,13 @@
+.allImage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 30px;
+    margin-right: 30px;
+    gap: 5px;
+}
+
+.smallImages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 250px 250px;
+}

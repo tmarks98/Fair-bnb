@@ -13,22 +13,42 @@ module.exports = {
       [
         {
           spotId: 1,
-          url: "https://www.tinyurl.com/dog",
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
+          preview: true,
+        },
+        {
+          spotId: 1,
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
+          preview: true,
+        },
+        {
+          spotId: 1,
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
+          preview: true,
+        },
+        {
+          spotId: 1,
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
+          preview: true,
+        },
+        {
+          spotId: 1,
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
           preview: true,
         },
         {
           spotId: 2,
-          url: "https://www.tinyurl.com/cat",
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
           preview: true,
         },
         {
           spotId: 3,
-          url: "https://www.tinyurl.com/rabbit",
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
           preview: true,
         },
         {
           spotId: 3,
-          url: "https://www.tinyurl.com/home",
+          url: "https://loveincorporated.blob.core.windows.net/contentimages/gallery/5cdb2f32-e8bf-4f4e-aabe-1743761f7db6-step-inside-the-incredible-homes-of-the-worlds-billionaires-tyler-perry-2.jpg",
           preview: false,
         },
       ],
