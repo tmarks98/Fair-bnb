@@ -1,4 +1,5 @@
 import './index.css'
+import ReserveButton from './reserveButton';
 
 export default function SpotInfo(props) {
     const spot = props.spot
@@ -21,13 +22,17 @@ export default function SpotInfo(props) {
         </div>
         </div>
         )}
+        <div className="description">
+        <div className="descriptionTitle">
         {spot.Owner && (
-        <h3>Hosted by {spot.Owner.firstName}</h3>
-        )}
+            <h3>Hosted by {spot.Owner.firstName}</h3>
+            )}
         <p>Spot description</p>
         <p>Spot description</p>
         <p>Spot description</p>
-    
+        </div>
+        <ReserveButton spot={spot}/>
+        </div>
         </>
     );
 }
