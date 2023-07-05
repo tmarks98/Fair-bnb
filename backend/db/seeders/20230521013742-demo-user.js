@@ -12,25 +12,60 @@ module.exports = {
       options,
       [
         {
-          firstName: "first",
-          lastName: "firstlast",
-          email: "first1@user.io",
-          username: "Demo-lition",
+          firstName: "john",
+          lastName: "smith",
+          email: "johnsmith@user.io",
+          username: "johnsmith",
           hashedPassword: bcrypt.hashSync("password"),
         },
         {
-          firstName: "second",
-          lastName: "secondlast",
-          email: "second1@user.io",
-          username: "FakeUser1",
-          hashedPassword: bcrypt.hashSync("password2"),
+          firstName: "jane",
+          lastName: "doe",
+          email: "janedoe@user.io",
+          username: "janedoe",
+          hashedPassword: bcrypt.hashSync("password"),
         },
         {
-          firstName: "third",
-          lastName: "thirdlast",
-          email: "third1@user.io",
-          username: "FakeUser2",
-          hashedPassword: bcrypt.hashSync("password3"),
+          firstName: "bryan",
+          lastName: "hill",
+          email: "bryanjohnson@user.io",
+          username: "bryanjohnson",
+          hashedPassword: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "will",
+          lastName: "haney",
+          email: "willhaney@user.io",
+          username: "willhaney",
+          hashedPassword: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "trevor",
+          lastName: "shull",
+          email: "trevorshull@user.io",
+          username: "trevorshull",
+          hashedPassword: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "peyton",
+          lastName: "mohr",
+          email: "peytonmohr@user.io",
+          username: "peytonmohr",
+          hashedPassword: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "abby",
+          lastName: "herman",
+          email: "abbyherman@user.io",
+          username: "abbyherman",
+          hashedPassword: bcrypt.hashSync("password"),
+        },
+        {
+          firstName: "amy",
+          lastName: "kohler",
+          email: "amykohler@user.io",
+          username: "amykohler",
+          hashedPassword: bcrypt.hashSync("password"),
         },
       ],
       {}
@@ -43,7 +78,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        username: { [Op.in]: ["Demo-lition", "FakeUser1", "FakeUser2"] },
+        username: { [Op.in]: ["johnsmith", "janedoe", "bryanjohnson", "willhaney", "trevorshull", "peytonmohr", "abbyherman", "amykohler"] },
       },
       {}
     );
