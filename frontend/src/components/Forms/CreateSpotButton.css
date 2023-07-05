@@ -1,0 +1,8 @@
+.createSpot:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.createSpot {
+    color: blue;
+}

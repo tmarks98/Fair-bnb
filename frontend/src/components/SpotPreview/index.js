@@ -21,12 +21,11 @@ export default function SpotPreview(props) {
         <div className="previewImage"><img src={spot.previewImage} alt="N/A" /></div>
         <div className='previews'>
         <div className="location">
-        <p>{spot.city}</p>
-        <p>{spot.state}</p>
+        <p>{spot.city}, {spot.state}</p>
         </div>
         <p>rating: {spot.avgRating}</p>
         </div>   
-        <p>${spot.price} night</p>
+        <p>${spot.price}/night</p>
         </div>
         </>
     );

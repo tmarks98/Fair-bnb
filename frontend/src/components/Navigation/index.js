@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import SpotForm from '../Forms/SpotsForm';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import CreateSpotButton from '../Forms/CreateSpotButton';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -13,6 +13,7 @@ function Navigation({ isLoaded }){
       <li>
         <NavLink exact to="/">Home</NavLink>
       </li>
+      <CreateSpotButton />
       {isLoaded && (
         <li>
           <ProfileButton user={sessionUser} />

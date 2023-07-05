@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import LandingPage from './pages/LandingPage'
 import SpotDetails from "./pages/SpotDetails";
 // import SpotForm from "./components/Forms/SpotsForm";
+import CreateSpot from "./pages/CreateSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
       {isLoaded && <Switch>
         <Route exact path={'/'}>
         <LandingPage />
+        </Route>
+        <Route eaxct path={'/spots/new'}>
+        <CreateSpot />
         </Route>
         <Route exact path={'/spots/:spotId'}>
         <SpotDetails />

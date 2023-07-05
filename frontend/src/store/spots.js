@@ -29,18 +29,6 @@ const actionCreateSpot = (spot) => ({
 //     type: DELETE_SPOT,
 //     payload: null 
 // })
-// const actionGetReview = () => ({
-//     type: GET_REVIEW,
-//     payload: null 
-// })
-// const actionCreateReview = () => ({
-//     type: CREATE_REVIEW,
-//     payload: null 
-// })
-// const actionDeleteReview = () => ({
-//     type: DELETE_REVIEW,
-//     payload: null 
-// })
 
 // thunks => the gateway to our backend api
 export const thunkGetAllSpots = () => async (dispatch) => {
@@ -94,52 +82,6 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
 //     const res = await csrfFetch(`/api/spots/${id}`, { method: 'DELETE'})
 //     if(res.ok) {
 //         return dispatch(actionDeleteSpot(id))
-//     }
-// }
-
-// export const thunkGetReview = (id) => async (dispatch) => {
-//     try {
-//         const res = await csrfFetch(`/api/spots/${id}`)
-//     if(res.ok) {
-//         const spot = await res.json()
-//         dispatch(actionGetSpot(spot))
-//     } else {
-//         throw new Error('Failed to get spot')
-//     }
-//     } catch (err) {
-//         console.log("Failed to get spot", err)
-//     }
-// }
-// export const thunkCreateReview = (id) => async (dispatch) => {
-//     try {
-//         const res = await csrfFetch(`/api/spots/${id}/reviews`, {
-//             method: "POST",
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(),
-//           });
-//     if(res.ok) {
-//         const spot = await res.json()
-//         dispatch(actionGetSpot(spot))
-//     } else {
-//         throw new Error('Failed to get spot')
-//     }
-//     } catch (err) {
-//         console.log("Failed to get spot", err)
-//     }
-// }
-// export const thunkDeleteReview = (id) => async (dispatch) => {
-//     try {
-//         const res = await csrfFetch(`/api/spots/${id}`)
-//     if(res.ok) {
-//         const spot = await res.json()
-//         dispatch(actionGetSpot(spot))
-//     } else {
-//         throw new Error('Failed to get spot')
-//     }
-//     } catch (err) {
-//         console.log("Failed to get spot", err)
 //     }
 // }
 
