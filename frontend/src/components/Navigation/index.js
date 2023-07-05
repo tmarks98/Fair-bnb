@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import SpotForm from '../Forms/SpotsForm';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 

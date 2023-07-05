@@ -27,9 +27,7 @@ export default function SpotInfo(props) {
         {spot.Owner && (
             <h3>Hosted by {spot.Owner.firstName}</h3>
             )}
-        <p>Spot description</p>
-        <p>Spot description</p>
-        <p>Spot description</p>
+        <p>{spot.description}</p>
         </div>
         <ReserveButton spot={spot}/>
         </div>

@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from './pages/LandingPage'
 import SpotDetails from "./pages/SpotDetails";
+// import SpotForm from "./components/Forms/SpotsForm";
 
 function App() {
   const dispatch = useDispatch();
