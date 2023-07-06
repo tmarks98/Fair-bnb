@@ -4,8 +4,8 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = 'spot/getAllSpots';
 const GET_SPOT = 'spot/getSpot';
 const CREATE_SPOT = 'spot/createSpot';
-// const EDIT_SPOT = 'spot/updateSpot';
-// const DELETE_SPOT = 'spot/deleteSpot';
+const UPDATE_SPOT = 'spot/updateSpot';
+const DELETE_SPOT = 'spot/deleteSpot';
 
 
 // action creators
@@ -21,14 +21,14 @@ const actionCreateSpot = (spot) => ({
     type: CREATE_SPOT,
     payload: spot 
 })
-// const actionEditSpot = () => ({
-//     type: EDIT_SPOT,
-//     payload: null 
-// })
-// const actionDeleteSpot = () => ({
-//     type: DELETE_SPOT,
-//     payload: null 
-// })
+const actionUpdateSpot = (spot) => ({
+    type: UPDATE_SPOT,
+    payload: spot 
+})
+const actionDeleteSpot = (spotId) => ({
+    type: DELETE_SPOT,
+    payload: spotId 
+})
 
 // thunks => the gateway to our backend api
 export const thunkGetAllSpots = () => async (dispatch) => {
@@ -74,16 +74,39 @@ export const thunkCreateSpot = (spot) => async (dispatch) => {
 }
 }
 
-// export const thunkEditSpot = (id) => async (dispatch) => {
-    
-// }
+export const thunkUpdateSpot = (spot) => async (dispatch) => {
+    try {
+        const res = await csrfFetch(`/api/spots/${spot.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(spot),
+        });
+        if(res.ok) {
+            const spot = await res.json();
+            dispatch(actionUpdateSpot(spot))
+        }
+    } catch (err) {
+        console.log('Failed to update spot', err)
+    }
+}
 
-// export const thunkDeleteSpot = (id) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/spots/${id}`, { method: 'DELETE'})
-//     if(res.ok) {
-//         return dispatch(actionDeleteSpot(id))
-//     }
-// }
+export const thunkDeleteSpot = (id) => async (dispatch) => {
+    try {
+        const res = await csrfFetch(`/api/spots/${id}`, {
+             method: 'DELETE'
+            })
+            if(res.ok) {
+                return dispatch(actionDeleteSpot(id))
+            }
+    } catch (err) {
+        console.log('Failed to delete spot', err)
+    }
+    
+    
+    const res = await csrfFetch(`/api/spots/${id}`, { method: 'DELETE'})
+    if(res.ok) {
+        return dispatch(actionDeleteSpot(id))
+    }
+}
 
 // reducers
 const initialState = {

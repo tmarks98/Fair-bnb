@@ -11,7 +11,10 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <div className="logo">
+          {/* <img src="https://i.ibb.co/jgZzfcH/letter-m-10136703.png" alt="" /> */}
+          <NavLink exact to="/">million-airbnb</NavLink>
+          </div>
       </li>
       <CreateSpotButton />
       {isLoaded && (

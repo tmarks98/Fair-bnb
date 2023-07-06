@@ -25,7 +25,7 @@ export default function SpotInfo(props) {
         <div className="description">
         <div className="descriptionTitle">
         {spot.Owner && (
-            <h3>Hosted by {spot.Owner.firstName}</h3>
+            <h3>{console.log('spot: ', spot)}Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
             )}
         <p>{spot.description}</p>
         </div>
