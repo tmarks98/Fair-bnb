@@ -1,0 +1,37 @@
+.delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: black 4px solid;
+    border-radius: 25px;
+    width: 400px;
+    height: 250px;
+    gap: 10px;
+    background-color: white;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.confirmDelete {
+    margin-bottom: 0;
+}
+
+.yes {
+    width: 90%;
+    height: 50px;
+    border: black 2px solid;
+    background-color: rgb(255, 108, 108);
+    box-shadow: 3px 2px 2px 1px;
+}
+
+.no {
+    width: 90%;
+    height: 50px;
+    border: black 2px solid;
+    background-color: darkgray;
+    box-shadow: 3px 2px 2px 1px;
+}

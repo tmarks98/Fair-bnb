@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { thunkCreateSpot, thunkUpdateSpot } from '../../store/spots';
@@ -25,7 +25,8 @@ function SpotForm({spot}) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         
-        const newSpot = { 
+        const newSpot = {
+            ...spot,
             address,
             city,
             state,
@@ -47,9 +48,36 @@ function SpotForm({spot}) {
         } else {
             dispatch(thunkCreateSpot(newSpot)).then((id) => history.push(`/spots/${id}`))
         }
-    
     }
-    
+
+    useEffect(() => {
+        let err = {};
+        if(!country.length) {
+            err.country = 'Country is required'
+        }
+        if(!address.length) {
+            err.address = 'Address is required'
+        }
+        if(!city.length) {
+            err.city = 'City is required'
+        }
+        if(!state.length) {
+            err.state = 'State is required'
+        }
+        if(description.length < 30) {
+            err.description = 'Description needs 30 or more characters'
+        }
+        if(!name.length) {
+            err.name = 'Name is required'
+        }
+        if(!price.length) {
+            err.price = 'Price is required'
+        }
+        if(!previewImages.length) {
+            err.previewImages = 'Image URL must end in .png, .jpg, or .jpeg'
+        }
+        setErrors(err)
+    }, [country, address, city, state, description, name, price, previewImages])
 
     return (
     <div className='page'>
