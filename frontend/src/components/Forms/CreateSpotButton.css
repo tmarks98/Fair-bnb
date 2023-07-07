@@ -1,6 +1,6 @@
 .createSpot:hover {
     cursor: pointer;
-    color: red;
+    color: rgb(255, 6, 6);
 }
 
 .createSpot {
