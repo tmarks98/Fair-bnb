@@ -1,4 +1,34 @@
 img {
-    width: 100%;
-    height: 200px;
+    width: 300px;
+    height: 300px;
+    border-radius: 13px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+    border: red solid 3px;
+}
+
+.previews {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+    border: rgb(142, 184, 44) solid 3px;
+}
+
+.previewWindow {
+    border: blue 3px solid;
+}
+
+.previewImages {
+    gap: 10px;
+}
+
+.delete1 {
+    width: 70px;
+}
+
+.update {
+    width: 70px;
+    margin-right: 10px;
+
 }

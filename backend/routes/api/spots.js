@@ -13,7 +13,12 @@ const {
   throwIfNull,
   checkAuthorization,
 } = require("../../utils/auth");
-const { validSpot, validReview, validBooking, validQuery } = require("../../utils/validation");
+const {
+  validSpot,
+  validReview,
+  validBooking,
+  validQuery,
+} = require("../../utils/validation");
 
 router.get("/", async (req, res) => {
   const { options, page, size } = validQuery(req.query);
@@ -22,8 +27,8 @@ router.get("/", async (req, res) => {
     attributes: [
       "spotId",
       [Sequelize.fn("AVG", Sequelize.col("stars")), "stars"],
-    ], 
-    group: ["spotId"]
+    ],
+    group: ["spotId"],
   });
   const previews = await SpotImage.findAll();
   const Spots = spots.map((spot) => {
@@ -81,7 +86,7 @@ router.get("/:spotId", async (req, res) => {
   const owner = await User.findOne({
     where: { id: spot.ownerId },
     attributes: ["id", "firstName", "lastName"],
-    as: "Owner"
+    as: "Owner",
   });
   const numReviews = reviews.length;
   const avgStarRating =
@@ -101,7 +106,7 @@ router.get("/:spotId", async (req, res) => {
 router.post("/", requireAuth, async (req, res) => {
   const spots = await Spot.create({
     ownerId: req.user.id,
-    ...validSpot(req.body),
+    // ...validSpot(req.body),
   });
   res.status(201).json(spots);
 });
@@ -203,19 +208,22 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   const spotId = req.params.spotId;
   const userId = req.user.id;
-  const { startDate, endDate } = req.body
+  const { startDate, endDate } = req.body;
   const spot = await Spot.findByPk(spotId);
   throwIfNull(spot);
-  checkAuthorization(userId !== spot.ownerId)
-  await validBooking(startDate, endDate, spotId)
+  checkAuthorization(userId !== spot.ownerId);
+  await validBooking(startDate, endDate, spotId);
   const booking = await Booking.create({
-    spotId, userId, startDate, endDate
-  })
+    spotId,
+    userId,
+    startDate,
+    endDate,
+  });
   await booking.reload({
     attributes: { include: ["id"] },
   });
 
-  res.json(booking)
+  res.json(booking);
 });
 
 module.exports = router;

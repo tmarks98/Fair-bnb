@@ -40,34 +40,34 @@ const validSpot = ({
   price,
 }) => {
   const container = { status: 400, message: "Bad Request", errors: {} };
-  if (!address) {
-    container.errors.address = "Street address is required";
-  }
-  if (!city) {
-    container.errors.city = "City is required";
-  }
-  if (!state) {
-    container.errors.state = "State is required";
-  }
-  if (!country) {
-    container.errors.country = "Country is required";
-  }
-  if (!lat || isNaN(lat)) {
-    container.errors.lat = "Latitude is not valid";
-  }
-  if (!lng || isNaN(lng)) {
-    container.errors.lng = "Longitude is not valid";
-  }
-  if (!name || (name && name.length > 50)) {
-    container.errors.name = "Name must be less than 50 characters";
-  }
-  if (!description) {
-    container.errors.description = "Description is required";
-  }
-  if (!price || (price && price < 0)) {
-    container.errors.price = "Price per day is required";
-  }
-  throwIfError(container);
+  // if (!address) {
+  //   container.errors.address = "Street address is required";
+  // }
+  // if (!city) {
+  //   container.errors.city = "City is required";
+  // }
+  // if (!state) {
+  //   container.errors.state = "State is required";
+  // }
+  // if (!country) {
+  //   container.errors.country = "Country is required";
+  // }
+  // if (!lat || isNaN(lat)) {
+  //   container.errors.lat = "Latitude is not valid";
+  // }
+  // if (!lng || isNaN(lng)) {
+  //   container.errors.lng = "Longitude is not valid";
+  // }
+  // if (!name || (name && name.length > 50)) {
+  //   container.errors.name = "Name must be less than 50 characters";
+  // }
+  // if (!description) {
+  //   container.errors.description = "Description is required";
+  // }
+  // if (!price || (price && price < 0)) {
+  //   container.errors.price = "Price per day is required";
+  // }
+  // throwIfError(container);
   return {
     address,
     city,
@@ -248,5 +248,5 @@ module.exports = {
   validSpot,
   validReview,
   validBooking,
-  validQuery
+  validQuery,
 };

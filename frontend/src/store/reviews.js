@@ -1,83 +1,96 @@
-import { csrfFetch } from './csrf'
+import { csrfFetch } from "./csrf";
 
 // types
-const GET_REVIEW = 'spot/getReview';
-const CREATE_REVIEW = 'spot/createReview';
-const DELETE_REVIEW = 'spot/deleteReview';
-
+const GET_REVIEW = "spot/getReview";
+const CREATE_REVIEW = "spot/createReview";
+const DELETE_REVIEW = "spot/deleteReview";
 
 // action creators
-const actionGetReview = () => ({
-    type: GET_REVIEW,
-    payload: 
-})
-const actionCreateReview = () => ({
-    type: CREATE_REVIEW,
-    payload: 
-})
+const actionGetReview = (review) => ({
+  type: GET_REVIEW,
+  review,
+});
+const actionCreateReview = (review) => ({
+  type: CREATE_REVIEW,
+  review,
+});
 const actionDeleteReview = () => ({
-    type: DELETE_REVIEW,
-    payload: 
-})
+  type: DELETE_REVIEW,
+});
 
 // thunks => the gateway to our backend api
 export const thunkGetReview = (id) => async (dispatch) => {
-    try {
-        const res = await csrfFetch(`/api/spots/${id}`)
-    if(res.ok) {
-        const spot = await res.json()
-        dispatch(actionGetSpot(spot))
+  try {
+    const res = await csrfFetch(`/api/spots/${id}/reviews`);
+    if (res.ok) {
+      const review = await res.json();
+      dispatch(actionGetReview(review));
     } else {
-        throw new Error('Failed to get spot')
+      throw new Error("Failed to get reviews");
     }
-    } catch (err) {
-        console.log("Failed to get spot", err)
-    }
-}
-export const thunkCreateReview = (id) => async (dispatch) => {
-    try {
-        const response = await csrfFetch(`/api/spots/${id}/reviews`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          });
-    if(res.ok) {
-        const spot = await res.json()
-        dispatch(actionGetSpot(spot))
+  } catch (err) {
+    console.log("Failed to get reviews", err);
+  }
+};
+export const thunkCreateReview = (id, stars, review) => async (dispatch) => {
+  try {
+    const res = await csrfFetch(`/api/spots/${id}/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ stars, review }),
+    });
+    if (res.ok) {
+      const body = await res.json();
+      dispatch(actionCreateReview(body));
     } else {
-        throw new Error('Failed to get spot')
+      throw new Error("Failed to post review");
     }
-    } catch (err) {
-        console.log("Failed to get spot", err)
-    }
-}
+  } catch (err) {
+    console.log("Failed to post review", err);
+  }
+};
 export const thunkDeleteReview = (id) => async (dispatch) => {
-    try {
-        const res = await csrfFetch(`/api/spots/${id}`)
-    if(res.ok) {
-        const spot = await res.json()
-        dispatch(actionGetSpot(spot))
+  try {
+    const res = await csrfFetch(`/api/spots/${id}`);
+    if (res.ok) {
+      const spot = await res.json();
+      dispatch(actionDeleteReview(spot));
     } else {
-        throw new Error('Failed to get spot')
+      throw new Error("Failed to get spot");
     }
-    } catch (err) {
-        console.log("Failed to get spot", err)
-    }
-}
+  } catch (err) {
+    console.log("Failed to get spot", err);
+  }
+};
 
 // reducers
 
 const initialState = {
-    allSpots: {},
-    currentSpot: {}
-}
+  spot: {},
+  user: {},
+};
 
-function spotsReducer (initialState, action) {
-    switch (action.type) {
-        
+function spotsReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_REVIEW: {
+      break;
     }
+    case CREATE_REVIEW: {
+      state.spot[action.review.spotId] = action.review;
+      if (state.user[action.review.userId] == null) {
+        state.user[action.review.userId] = [];
+      }
+      state.user[action.review.userId].push(action.review.spotId);
+      return { ...state };
+    }
+    case DELETE_REVIEW: {
+      break;
+    }
+    default:
+      return initialState;
+  }
 }
 
-export default spotsReducer
+export default spotsReducer;
