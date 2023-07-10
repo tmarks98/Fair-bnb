@@ -8,20 +8,28 @@ import { useSelector } from "react-redux";
 function SpotForm({ spot }) {
   const dispatch = useDispatch();
   const history = useHistory(); //
-  const [address, setAddress] = useState(spot?.address ?? '');
-  const [city, setCity] = useState(spot?.city ?? '');
-  const [state, setState] = useState(spot?.state ?? '');
-  const [country, setCountry] = useState(spot?.country ?? '');
-  const [name, setName] = useState(spot?.name ?? '');
-  const [description, setDescription] = useState(spot?.description ?? '');
-  const [price, setPrice] = useState(spot?.price ?? '');
+  const [address, setAddress] = useState(spot?.address ?? "");
+  const [city, setCity] = useState(spot?.city ?? "");
+  const [state, setState] = useState(spot?.state ?? "");
+  const [country, setCountry] = useState(spot?.country ?? "");
+  const [name, setName] = useState(spot?.name ?? "");
+  const [description, setDescription] = useState(spot?.description ?? "");
+  const [price, setPrice] = useState(spot?.price ?? "");
   const [lng, setLng] = useState(90);
   const [lat, setLat] = useState(90);
-  const [previewImages, setPreviewImages] = useState(spot?.previewImages ?? '');
-  const [previewImages2, setPreviewImages2] = useState(spot?.previewImages2 ?? '');
-  const [previewImages3, setPreviewImages3] = useState(spot?.previewImages3 ?? '');
-  const [previewImages4, setPreviewImages4] = useState(spot?.previewImages4 ?? '');
-  const [previewImages5, setPreviewImages5] = useState(spot?.previewImages5 ?? '');
+  const [previewImages, setPreviewImages] = useState(spot?.previewImages ?? "");
+  const [previewImages2, setPreviewImages2] = useState(
+    spot?.previewImages2 ?? ""
+  );
+  const [previewImages3, setPreviewImages3] = useState(
+    spot?.previewImages3 ?? ""
+  );
+  const [previewImages4, setPreviewImages4] = useState(
+    spot?.previewImages4 ?? ""
+  );
+  const [previewImages5, setPreviewImages5] = useState(
+    spot?.previewImages5 ?? ""
+  );
   const [errors, setErrors] = useState({});
   const ifExist = spot != null;
   const dispatchedSpots = useSelector((state) => state.spots.singleSpot);
@@ -42,6 +50,8 @@ function SpotForm({ spot }) {
       lat,
     };
 
+    console.log("spot about to subbmit: ", newSpot);
+
     const images = [
       previewImages,
       previewImages2,
@@ -57,7 +67,6 @@ function SpotForm({ spot }) {
       );
     } else {
       dispatch(thunkCreateSpot(newSpot, images)).then((id) => {
-        console.log('id: ', id)
         history.push(`/spots/${id}`);
       });
     }

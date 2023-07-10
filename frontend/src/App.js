@@ -4,11 +4,11 @@ import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from './pages/LandingPage'
-import SpotDetails from "./pages/SpotDetails";
 import CreateSpot from "./pages/CreateSpot";
 import ManageSpots from "./components/ManageSpots";
 import UpdateSpot from "./components/UpdateSpot";
 import { thunkGetAllSpots } from "./store/spots";
+import SpotInfo from "./components/SpotInfo";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,9 +17,7 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(thunkGetAllSpots())
-}, [dispatch])
+
 
   return (
     <>
@@ -38,7 +36,7 @@ function App() {
           <UpdateSpot />
         </Route>
         <Route exact path={'/spots/:spotId'}>
-        <SpotDetails />
+        <SpotInfo />
         </Route>
         </Switch>}
     </>

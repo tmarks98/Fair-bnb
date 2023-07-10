@@ -9,9 +9,11 @@ import "./LandingPage.css";
 const LandingPage = () => {
   const dispatch = useDispatch();
 
-  const spots = useSelector((state) => Object.values(state.spots.allSpots));
+  useEffect(() => {
+    dispatch(thunkGetAllSpots());
+  }, [dispatch]);
 
-  console.log("whats in here: ", spots);
+  const spots = useSelector((state) => Object.values(state.spots.allSpots));
   return (
     <>
       <div className="gridContainer">

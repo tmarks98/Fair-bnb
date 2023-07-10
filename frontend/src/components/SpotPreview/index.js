@@ -30,7 +30,7 @@ export default function SpotPreview(props) {
             </p>
             <p>Owner ID: {spot.ownerId}</p>
           </div>
-          <p>rating: {spot.avgRating}</p>
+          <p> <i className="fas fa-star" />{spot.avgRating}</p>
         </div>
         <p>${spot.price}/night</p>
       </div>

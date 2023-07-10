@@ -32,6 +32,7 @@ const actionDeleteSpot = (spotId) => ({
 // thunks => the gateway to our backend api
 export const thunkGetAllSpots = () => async (dispatch) => {
   try {
+    
     const res = await csrfFetch("/api/spots");
     if (!res.ok) {
       throw new Error("Failed to get spots");
@@ -58,6 +59,7 @@ export const thunkGetCurrentSpots = (spots) => async (dispatch) => {
 
 export const thunkGetSpot = (spotId) => async (dispatch) => {
   try {
+    console.log('spotid: ', spotId)
     const res = await csrfFetch(`/api/spots/${spotId}`);
     if (!res.ok) {
       throw new Error("Failed to get spot");
@@ -83,13 +85,13 @@ export const thunkCreateSpot = (spot, images) => async (dispatch) => {
       for (let image of images) {
         await csrfFetch(`/api/spots/${createdSpot.id}/images`, {
           method: "POST",
-          body: JSON.stringify({ url: image }),
+          body: JSON.stringify({ url: image, preview: true }),
         });
         createdSpot.SpotImages.push({ url: image });
       }
-      const spot = await res.json();
-      dispatch(actionCreateSpot(spot));
-      return spot.id;
+
+      dispatch(actionCreateSpot(createdSpot));
+      return createdSpot.id;
     }
   } catch (err) {
     console.log("Failed to get spot", err);

@@ -9,7 +9,6 @@ export default function UpdateSpot() {
 
     return (
         <div>
-            {console.log(spot)}
         <SpotForm spot={spot} />
         </div>
     );

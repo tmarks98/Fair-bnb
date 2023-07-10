@@ -19,7 +19,7 @@ export default function ManageSpots() {
     return (
 
         <div>
-            <h2>Manage Your Spots</h2>
+            <h2>Manage Spots</h2>
             <div className='spots'>
                 {usersSpots.map((spot) => {
                 return <SpotPreview key={spot.id} spot={spot} />})};

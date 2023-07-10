@@ -1,21 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { thunkCreateReview } from "../../store/reviews";
+import { useEffect, useState } from "react";
+import { thunkCreateReview, thunkGetReview } from "../../store/reviews";
 import "./index.css";
 import ReserveButton from "./reserveButton";
+import { thunkGetSpot } from "../../store/spots";
+import { useParams } from "react-router-dom";
 
-export default function SpotInfo(props) {
-  const spot = props.spot;
+export default function SpotInfo() {
+  const spot = useSelector((state) => state.spots.singleSpot);
   const dispatch = useDispatch();
   const [review, setReview] = useState("");
   const [stars, setStars] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const spots = useSelector((state) => state?.review?.spots) || [];
+  const { spotId } = useParams();
+
+  useEffect(() => {
+    dispatch(thunkGetSpot(spotId)).then(() => {
+
+      dispatch(thunkGetReview(spotId));
+    });
+  }, [dispatch, spotId]);
   if (!spot) return null;
-  console.log("check me: ", spots);
-  const spotReview = spots.filter((sp) => {
-    return sp.id === spot.id;
-  });
 
   const createReview = () => {
     dispatch(thunkCreateReview(spot.id, stars, review));
@@ -50,7 +55,6 @@ export default function SpotInfo(props) {
     return res;
   };
 
-  console.log("im a retardL ", spot);
   return (
     <>
       <div>
@@ -101,7 +105,6 @@ export default function SpotInfo(props) {
         </div>
       </div>
       <hr />
-      <div>{spotReview.stars}</div>
       <button
         onClick={() => {
           setShowModal(true);
@@ -109,18 +112,7 @@ export default function SpotInfo(props) {
       >
         {"Post Your Review"}
       </button>
-
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {spotReview.map((review) => {
-          return (
-            <div stlye={{ display: "flex", flexDirection: "column" }}>
-              <div>{review.createdAt}</div>
-              <div>{review.review}</div>
-            </div>
-          );
-        })}
-      </div>
-
+      <Reviews />
       <div
         className="outerModal"
         style={{ display: !showModal ? "none" : "flex" }}
@@ -132,6 +124,7 @@ export default function SpotInfo(props) {
 
           <div>
             <textarea
+            placeholder="Leave your review here..."
               onChange={(e) => {
                 setReview(e.target.value);
               }}
@@ -140,7 +133,7 @@ export default function SpotInfo(props) {
           <div>{showSelectedStars()}</div>
           <div>
             <button
-              onClick={() => {
+              onClick={(e) => {
                 createReview();
                 setShowModal(false);
               }}
@@ -151,5 +144,31 @@ export default function SpotInfo(props) {
         </div>
       </div>
     </>
+  );
+}
+
+function Reviews() {
+  const reviews = useSelector((state) => state.review.reviews);
+  const dispatch = useDispatch();
+  const { spotId } = useParams();
+  // useEffect(() => {
+  //   console.log('spotid1:', spotId)
+  //   dispatch(thunkGetReview(spotId));
+  // }, [dispatch, spotId]);
+  if (!reviews || reviews.length < 0) return null;
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {reviews.map((review) => {
+        return (
+          <div
+            key={review.id}
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <div>{review.createdAt}</div>
+            <div>{review.review}</div>
+          </div>
+        );
+      })}
+    </div>
   );
 }

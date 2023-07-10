@@ -106,7 +106,7 @@ router.get("/:spotId", async (req, res) => {
 router.post("/", requireAuth, async (req, res) => {
   const spots = await Spot.create({
     ownerId: req.user.id,
-    // ...validSpot(req.body),
+    ...validSpot(req.body),
   });
   res.status(201).json(spots);
 });
