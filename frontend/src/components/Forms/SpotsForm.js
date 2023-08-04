@@ -142,7 +142,7 @@ function SpotForm({ spot }) {
   ]);
 
   return (
-    <div className="page">
+    <div className="page"  style={{marginLeft: '30%', marginRight: '30%'}}>
       <div className="title">
         <h2>Create a new Spot</h2>
         <h3>Where's your place located?</h3>
@@ -153,9 +153,10 @@ function SpotForm({ spot }) {
       </div>
       <form onSubmit={handleSubmit} className="createForm">
         <div className="form">
-          <label>
+          <label style={{width: '100%'}}>
             <div>Country</div>
             <input
+              style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
               placeholder="Country"
               type="text"
               value={country}
@@ -164,9 +165,10 @@ function SpotForm({ spot }) {
             <div className="errors">{errors.country}</div>
           </label>
 
-          <label>
+          <label style={{width: '100%'}}>
             <div>Address</div>
             <input
+              style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
               placeholder="Address"
               type="text"
               value={address}
@@ -174,10 +176,11 @@ function SpotForm({ spot }) {
             />
             <div className="errors">{errors.address}</div>
           </label>
-
-          <label>
+    <div style={{display: 'flex', gap: '5%', width: '100%'}}>
+          <label style={{width: '100%'}}>
             <div>City</div>
             <input
+              style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
               placeholder="City"
               type="text"
               value={city}
@@ -185,10 +188,10 @@ function SpotForm({ spot }) {
             />
             <div className="errors">{errors.city}</div>
           </label>
-
-          <label>
+          <label style={{width: '100%'}}>
             <div>State</div>
             <input
+              style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
               placeholder="STATE"
               type="text"
               value={state}
@@ -196,9 +199,11 @@ function SpotForm({ spot }) {
             />
             <div className="errors">{errors.state}</div>
           </label>
-          <div>
+          </div>
+          <hr style={{border: '1px grey solid', width: '98%'}}/>
+          <div  style={{width: '100%'}}>
             <label>
-              <div className="description">
+              <div className="descriptionCreateForm">
                 <h2>Describe your place to guests</h2>
                 <p>
                   Mention the best features of your space, any special
@@ -207,6 +212,7 @@ function SpotForm({ spot }) {
                 </p>
               </div>
               <textarea
+                style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)', height: '150px'}}
                 placeholder="Please write at least 30 characters"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -214,7 +220,8 @@ function SpotForm({ spot }) {
               <div className="errors">{errors.description}</div>
             </label>
           </div>
-          <label>
+          <hr style={{border: '1px grey solid', width: '98%'}}/>
+          <label style={{width: '100%'}}>
             <div>
               <h2>Create a title for your spot</h2>
               <p>
@@ -223,6 +230,7 @@ function SpotForm({ spot }) {
               </p>
             </div>
             <input
+              style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
               placeholder="Name of your spot"
               type="text"
               value={name}
@@ -230,7 +238,8 @@ function SpotForm({ spot }) {
             />
             <div className="errors">{errors.name}</div>
           </label>
-          <label>
+          <hr style={{border: '1px grey solid', width: '98%'}}/>
+          <label style={{width: '100%'}}>
             <div>
               <h2>Set a base price for your spot</h2>
               <p>
@@ -238,8 +247,8 @@ function SpotForm({ spot }) {
                 higher in search results.
               </p>
             </div>
-            $
-            <input
+            $ <input
+              style={{width: '95%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)', alignSelf: 'right'}}
               placeholder="Price per night (USD)"
               type="text"
               value={price}
@@ -247,13 +256,15 @@ function SpotForm({ spot }) {
             />
             <div className="errors">{errors.price}</div>
           </label>
-          <label>
+          <hr style={{border: '1px grey solid', width: '98%'}}/>
+          <label style={{width: '100%'}}>
             <div>
               <h2>Liven up your spot with photos</h2>
               <p>Submit a link to at least one photo to publish your spot.</p>
             </div>
             <div className="previewImages">
               <input
+                style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
                 placeholder="Preview Image URL"
                 type="text"
                 value={previewImages}
@@ -261,6 +272,7 @@ function SpotForm({ spot }) {
               />
               <div className="errors">{errors.previewImages}</div>
               <input
+                style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
                 placeholder="Image URL"
                 type="text"
                 value={previewImages2}
@@ -268,6 +280,7 @@ function SpotForm({ spot }) {
               />
               <div className="errors">{errors.previewImages2}</div>
               <input
+                style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
                 placeholder="Image URL"
                 type="text"
                 value={previewImages3}
@@ -275,6 +288,7 @@ function SpotForm({ spot }) {
               />
               <div className="errors">{errors.previewImages3}</div>
               <input
+                style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
                 placeholder="Image URL"
                 type="text"
                 value={previewImages4}
@@ -282,6 +296,7 @@ function SpotForm({ spot }) {
               />
               <div className="errors">{errors.previewImages4}</div>
               <input
+                style={{width: '100%', border: 'black 3px solid', backgroundColor: 'rgb(232,240,254)'}}
                 placeholder="Image URL"
                 type="text"
                 value={previewImages5}
@@ -290,9 +305,12 @@ function SpotForm({ spot }) {
               <div className="errors">{errors.previewImages5}</div>
             </div>
           </label>
-          <button type="submit" className="submitButton">
+          <hr style={{border: '1px grey solid', width: '98%'}}/>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <button type="submit" className="submitButton" style={{border: 'solid black 3px', boxShadow: '2px 2px 1px 1px black', backgroundColor: 'rgb(255,90,95)', color: 'white'}}>
             Create Spot
           </button>
+          </div>
         </div>
       </form>
     </div>

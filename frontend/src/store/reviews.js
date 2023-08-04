@@ -14,19 +14,21 @@ const actionCreateReview = (review) => ({
   type: CREATE_REVIEW,
   review,
 });
-const actionDeleteReview = () => ({
+const actionDeleteReview = (id) => ({
   type: DELETE_REVIEW,
+  id,
 });
 
 // thunks => the gateway to our backend api
 export const thunkGetReview = (id) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${id}/reviews`);
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(actionGetReview(data.Reviews));
-    } else {
-      throw new Error("Failed to get reviews");
-    }
+  const res = await csrfFetch(`/api/spots/${id}/reviews`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(actionGetReview(data.Reviews));
+    return data.Reviews;
+  } else {
+    throw new Error("Failed to get reviews");
+  }
 };
 
 export const thunkCreateReview = (id, stars, review) => async (dispatch) => {
@@ -40,6 +42,7 @@ export const thunkCreateReview = (id, stars, review) => async (dispatch) => {
     });
     if (res.ok) {
       const body = await res.json();
+      console.log("this is the body", body);
       dispatch(actionCreateReview(body));
       return body;
     } else {
@@ -51,15 +54,15 @@ export const thunkCreateReview = (id, stars, review) => async (dispatch) => {
 };
 export const thunkDeleteReview = (id) => async (dispatch) => {
   try {
-    const res = await csrfFetch(`/api/spots/${id}`);
+    const res = await csrfFetch(`/api/reviews/${id}`, { method: "DELETE" });
     if (res.ok) {
-      const spot = await res.json();
-      dispatch(actionDeleteReview(spot));
+      dispatch(actionDeleteReview(id));
+      return id;
     } else {
-      throw new Error("Failed to get spot");
+      throw new Error("Failed to get review");
     }
   } catch (err) {
-    console.log("Failed to get spot", err);
+    console.log("Failed to get review", err);
   }
 };
 
@@ -75,14 +78,21 @@ function spotsReducer(state = initialState, action) {
   let newReviews = [];
   switch (action.type) {
     case GET_REVIEW: {
-      console.log('state1: ', action.review)
+      console.log("state1: ", action.review);
       return { ...state, reviews: action.review };
     }
     case CREATE_REVIEW: {
-      newReviews = state.reviews? [...state.reviews]: []
-      const newState = { reviews: newReviews, user: {...state.user} };
+      newReviews = state.reviews ? [...state.reviews] : [];
+      console.log("this is the action", action);
+      const newState = { reviews: newReviews };
+      const user = { ...state.sessionUser };
       newState.reviews.push(action.review);
+      newState.User = user;
       return newState;
+    }
+    case DELETE_REVIEW: {
+      console.log("actionnnn", action);
+      return { reviews: state.reviews.filter((ele) => ele.id !== action.id) };
     }
     default:
       return initialState;

@@ -1,0 +1,78 @@
+.signUp {
+    width: 370px;
+    height: 370px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 15px;
+}
+
+.signUpForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.signUpButton {
+    width: 310px;
+    height: 50px;
+    background-color: rgb(248, 77, 77);
+    border: black 3px solid;
+    box-shadow: 2px 2px 0px black;
+    color: white;
+    margin-top: 11px;
+}
+
+.signUpButton[disabled]{
+    margin-top: 12px;
+    background-color: white;
+    color: grey;
+    border: grey 3px solid;
+    box-shadow: 2px 2px 0px grey;
+}
+
+.signUpInputBox {
+    width: 95%;
+    margin-left: 5px;
+    border: black 4px solid;
+    background-color: rgb(214, 231, 249);
+    
+}
+
+.signUpInputBox2 {
+    width: 95%;
+    margin-left: 5px;
+    border: black 4px solid;
+    background-color: rgb(214, 231, 249);
+}
+
+.signUpInputBox3 {
+    width: 95%;
+    margin-left: 5px;
+    border: black 4px solid;
+    background-color: rgb(214, 231, 249);
+    
+}
+
+.signUpInputBox4 {
+    width: 95%;
+    margin-left: 5px;
+    border: black 4px solid;
+    background-color: rgb(214, 231, 249);
+}
+
+.signUpInputBox5 {
+    width: 95%;
+    margin-left: 5px;
+    border: black 4px solid;
+    background-color: rgb(214, 231, 249);
+    
+}
+
+.signUpInputBox6 {
+    width: 95%;
+    margin-left: 5px;
+    border: black 4px solid;
+    background-color: rgb(214, 231, 249);
+}

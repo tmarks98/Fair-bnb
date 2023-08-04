@@ -20,24 +20,23 @@ export default function SpotPreview(props) {
         }}
         title={spot.name}
       >
-        <div className="previewImage">
-          <img src={spot.previewImage} alt="N/A" />
-        </div>
+          <img className='images' src={spot.previewImage} alt="Img unavailable at this time" />
+          <div className="allContent" style={{paddingBottom: '5px'}}>
         <div className="previews">
-          <div className="location">
-            <p>
-              {spot.city}, {spot.state}
-            </p>
-            <p>Owner ID: {spot.ownerId}</p>
+          <div className="location" style={{width: '100%'}}>
+            <p style={{fontSize: '20px', margin: '0px', paddingTop: '10px', width: '100%', display: 'flex', justifyContent: 'space-between', paddingLeft: '5px'}}>{spot.city}, {spot.state} <span style={{paddingRight: '5px'}}><i className="fas fa-star" />{spot.avgRating?spot.avgRating.toFixed(2) : "New"}</span></p>
           </div>
-          <p> <i className="fas fa-star" />{spot.avgRating}</p>
         </div>
-        <p>${spot.price}/night</p>
+        <p style={{color: 'grey', fontSize: '16px', margin: '0px', paddingTop: '4px', paddingLeft: '5px'}}>5 miles away</p>
+        <p style={{color: 'grey', fontSize: '16px', margin: '0px', paddingTop: '4px', paddingLeft: '5px'}}>Aug 8-12</p>
+        <p style={{fontSize: '19px', margin: '0px', paddingTop: '6px'}}><span style={{fontWeight: '600', paddingLeft: '5px'}}>${spot.price}</span> night</p>
       </div>
+      
+      {props.footer ? (
       <div>
         <button
           className="update"
-          onClick={() => history.push(`/spots/${spot.id}/edit`)}
+          onClick={() => history.push(`/spots/${spot.id}/edit`)}span
         >
           Update
         </button>
@@ -50,9 +49,11 @@ export default function SpotPreview(props) {
           Delete
         </button>
       </div>
+        ) : null}
       {deleteMod ? (
         <DeleteSpot spot={spot} setDeleteMod={setDeleteMod} />
       ) : null}
+      </div>
     </>
   );
 }

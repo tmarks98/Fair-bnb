@@ -5,6 +5,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { useHistory, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import './ProfileButton.css'
 
 function ProfileButton({ user }) {
@@ -12,6 +13,9 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   let history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
+  const spot = useSelector((state) => state.spots.singleSpot);
+  const isSpotOwner = sessionUser?.id === spot.ownerId;
 
   const openMenu = () => {
     if (showMenu) return;
@@ -46,22 +50,27 @@ function ProfileButton({ user }) {
   return (
     <>
       <button className='profileButton' onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        <i className="fas fa-user-circle"/>
       </button>
+      <div>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
+          <div>
             <li>Hello, {user.username}</li>
             <li>{user.email}</li>
             <li>
+              {isSpotOwner ? (
               <NavLink to='/spots/current'>
                 Manage Spots
-              </NavLink>
+              </NavLink>) : (
+              <NavLink to='/spots/new'>
+              Create a New Spot
+            </NavLink>)}
             </li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
-          </>
+          </div>
         ) : (
           <>
             <OpenModalMenuItem
@@ -77,6 +86,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
+      </div>
     </>
   );
 }

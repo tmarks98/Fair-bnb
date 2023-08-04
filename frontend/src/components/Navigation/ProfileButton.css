@@ -3,4 +3,16 @@
     border-radius: 20px;
     height: 40px;
     width: 80px;
+    
+}
+
+.profile-dropdown {
+    background-color: rgb(171, 168, 168);
+    border: 3px solid black;
+    padding: 10px 30px 10px 25px;
+    position: ;   
+    margin-top: 5px;
+    margin-right: 500px;
+    font-size: 120%;
+    border: 3px red solid
 }

@@ -15,13 +15,13 @@ const LandingPage = () => {
 
   const spots = useSelector((state) => Object.values(state.spots.allSpots));
   return (
-    <>
-      <div className="gridContainer">
+    <div style={{ justifyContent: "space-between", marginLeft: '50px', marginRight: '50px'}}>
+      <div className="gridContainer" style={{marginTop: '25px'}}>
         {spots.map((spot, ele) => {
           return <SpotPreview key={ele} spot={spot} />;
         })}
       </div>
-    </>
+    </div>
   );
 };
 export default LandingPage;
