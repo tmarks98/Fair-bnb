@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { thunkDeleteReview } from "../../store/reviews";
+import { thunkGetSpot } from "../../store/spots";
 
 export default function DeleteReview(props) {
   let dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function DeleteReview(props) {
                 return ele.id !== id;
               });
               props.setReviews(data);
+              dispatch(thunkGetSpot(props.spotId)).then(() => {});
             }
           );
         }}

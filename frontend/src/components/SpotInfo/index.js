@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { thunkCreateReview, thunkGetReview } from "../../store/reviews";
 import "./index.css";
 import { thunkGetSpot } from "../../store/spots";
@@ -20,7 +20,6 @@ export default function SpotInfo() {
   const sessionUser = useSelector((state) => state.session.user);
   // let reviewz = useSelector((state) => state.review.reviews);
   const [re, setRe] = useState([]);
-  console.log("twice: ", re);
 
   useEffect(() => {
     dispatch(thunkGetSpot(spotId)).then(() => {
@@ -30,16 +29,17 @@ export default function SpotInfo() {
     });
   }, [dispatch, spotId]);
 
-  if (!spot) return null;
   let reviewWord;
   if (spot.numReviews === 1) {
     reviewWord = "review";
   } else {
     reviewWord = "reviews";
   }
-  let rating = spot.avgStarRating
+  let rating = useRef(0);
+  rating.current = spot.avgStarRating
     ? `${spot.avgStarRating?.toFixed(2)} • ${spot.numReviews} ${reviewWord}`
     : " New";
+  if (!spot) return null;
   const isOwner = sessionUser?.id === spot.ownerId;
   const isReviewed = re?.find((ele) => ele.User?.id === sessionUser?.id);
 
@@ -56,8 +56,9 @@ export default function SpotInfo() {
 
         let data = closure.map((a) => ({ ...a }));
         data.push(review2);
-        console.log("another test: ", data);
+
         setRe(data);
+        dispatch(thunkGetSpot(spotId)).then(() => {});
       }
     );
   };
@@ -159,7 +160,7 @@ export default function SpotInfo() {
           <h2 style={{ paddingLeft: "10px" }}>${spot.price}</h2>
           <h2 style={{ paddingLeft: "10px" }}>
             <i className="fas fa-star"></i>
-            {rating}
+            {rating.current}
           </h2>
           <button
             style={{
@@ -212,6 +213,7 @@ export default function SpotInfo() {
                   height: "120px",
                 }}
                 placeholder="Leave your review here..."
+                value={review}
                 onChange={(e) => {
                   setReview(e.target.value);
                 }}
@@ -234,6 +236,7 @@ export default function SpotInfo() {
                 }}
                 onClick={(e) => {
                   createReview();
+                  setReview("");
                   setShowModal(false);
                 }}
               >
