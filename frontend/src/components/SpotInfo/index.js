@@ -18,8 +18,9 @@ export default function SpotInfo() {
   const [showModal, setShowModal] = useState(false);
   const { spotId } = useParams();
   const sessionUser = useSelector((state) => state.session.user);
-  let reviewz = useSelector((state) => state.review.reviews);
-  const [re, setRe] = useState(reviewz);
+  // let reviewz = useSelector((state) => state.review.reviews);
+  const [re, setRe] = useState([]);
+  console.log("twice: ", re);
 
   useEffect(() => {
     dispatch(thunkGetSpot(spotId)).then(() => {
@@ -29,34 +30,36 @@ export default function SpotInfo() {
     });
   }, [dispatch, spotId]);
 
-  console.log("reeeeeer3eeeeeee: ", re);
-
   if (!spot) return null;
   let reviewWord;
-  if(spot.numReviews === 1) {
-    reviewWord = 'review'
+  if (spot.numReviews === 1) {
+    reviewWord = "review";
   } else {
-    reviewWord = 'reviews'
+    reviewWord = "reviews";
   }
-  let rating = spot.avgStarRating?`${spot.avgStarRating?.toFixed(2)} • ${spot.numReviews} ${reviewWord}`:' New';
+  let rating = spot.avgStarRating
+    ? `${spot.avgStarRating?.toFixed(2)} • ${spot.numReviews} ${reviewWord}`
+    : " New";
   const isOwner = sessionUser?.id === spot.ownerId;
-  const isReviewed = reviewz?.find((ele) => ele.User?.id===sessionUser?.id)
+  const isReviewed = re?.find((ele) => ele.User?.id === sessionUser?.id);
 
-  const createReview = () => {
-    dispatch(thunkCreateReview(spot.id, stars, review)).then((review2) => {
-      review2.User = {
-        userId: sessionUser.id,
-        firstName: sessionUser.firstName,
-        lastName: sessionUser.lastName,
-      };
-      console.log("another test: ", review2);
-      let data = re;
-      console.log("inside me: ", data);
-      data.push(review2);
-      console.log("inside me after: ", data);
-      console.log("inside old data: ", re);
-      setRe(data);
-    });
+  const createReview = async () => {
+    let closure = re;
+    await dispatch(thunkCreateReview(spot.id, stars, review)).then(
+      (review2) => {
+        let User = {
+          id: sessionUser.id,
+          firstName: sessionUser.firstName,
+          lastName: sessionUser.lastName,
+        };
+        review2.User = User;
+
+        let data = closure.map((a) => ({ ...a }));
+        data.push(review2);
+        console.log("another test: ", data);
+        setRe(data);
+      }
+    );
   };
 
   const showSelectedStars = () => {
@@ -89,7 +92,10 @@ export default function SpotInfo() {
   };
 
   return (
-    <div className="wholePage" style={{marginLeft: '16%', marginRight: '16%'}}>
+    <div
+      className="wholePage"
+      style={{ marginLeft: "16%", marginRight: "16%" }}
+    >
       <div className="titlee">
         <h2>{spot.name}</h2>
         <p style={{ fontSize: "20px" }}>
@@ -118,13 +124,21 @@ export default function SpotInfo() {
               <img src={spot.SpotImages[1].url} alt=""></img>
             )}
             {spot.SpotImages[2] && (
-              <img src={spot.SpotImages[2].url} alt="" style={{borderTopRightRadius: '15px'}}></img>
+              <img
+                src={spot.SpotImages[2].url}
+                alt=""
+                style={{ borderTopRightRadius: "15px" }}
+              ></img>
             )}
             {spot.SpotImages[3] && (
               <img src={spot.SpotImages[3].url} alt=""></img>
             )}
             {spot.SpotImages[4] && (
-              <img src={spot.SpotImages[4].url} alt="" style={{borderBottomRightRadius: '15px'}}></img>
+              <img
+                src={spot.SpotImages[4].url}
+                alt=""
+                style={{ borderBottomRightRadius: "15px" }}
+              ></img>
             )}
           </div>
         </div>
@@ -138,73 +152,108 @@ export default function SpotInfo() {
           )}
           <p>{spot.description}</p>
         </div>
-        <div className="button" style={{border: '5px black solid', width: '400px'}}>
-          <h2 style={{paddingLeft: '10px'}}>${spot.price}</h2>
-          <h2 style={{paddingLeft: '10px'}}>
+        <div
+          className="button"
+          style={{ border: "5px black solid", width: "400px" }}
+        >
+          <h2 style={{ paddingLeft: "10px" }}>${spot.price}</h2>
+          <h2 style={{ paddingLeft: "10px" }}>
             <i className="fas fa-star"></i>
             {rating}
           </h2>
-          <button style={{paddingLeft: '5px', marginTop: '10px', marginLeft: '10px', marginBottom: '10px', width: '95%', height: '40px', backgroundColor: 'rgb(248, 77, 77)', border: 'black 3px solid', boxShadow: '2px 2px 2px 1px'}}>Reserve</button>
+          <button
+            style={{
+              paddingLeft: "5px",
+              marginTop: "10px",
+              marginLeft: "10px",
+              marginBottom: "10px",
+              width: "95%",
+              height: "40px",
+              backgroundColor: "rgb(248, 77, 77)",
+              border: "black 3px solid",
+              boxShadow: "2px 2px 2px 1px",
+            }}
+          >
+            Reserve
+          </button>
         </div>
       </div>
-      <hr style={{marginTop: '40px', marginBottom: '40px', width: '98%'}}/>
+      <hr style={{ marginTop: "40px", marginBottom: "40px", width: "98%" }} />
       <div className="reviewArea">
-      {sessionUser && !isOwner && !isReviewed && <button
-        className="postReview"
-        onClick={() => {
-          setShowModal(true);
-        }}
-      >
-        {reviewz.length > 0 ? "Post Your Review": 'Be the first to post a review!'}
-      </button>}
-      <Reviews re={re} setRe={setRe} />
-      <div
-        className="outerModal"
-        style={{ display: !showModal ? "none" : "flex" }}
-      >
-        <div className="modal">
-          <div className="modalTitle">
-            <h1>How was your stay?</h1>
-          </div>
+        {sessionUser && !isOwner && !isReviewed && (
+          <button
+            className="postReview"
+            onClick={() => {
+              setShowModal(true);
+            }}
+          >
+            {re.length > 0
+              ? "Post Your Review"
+              : "Be the first to post a review!"}
+          </button>
+        )}
+        <Reviews re={re} setRe={setRe} />
+        <div
+          className="outerModal"
+          style={{ display: !showModal ? "none" : "flex" }}
+        >
+          <div className="modal">
+            <div className="modalTitle">
+              <h1>How was your stay?</h1>
+            </div>
 
-          <div style={{width: '100%'}}>
-            <textarea
-            style={{width: '92%', marginLeft: '10px', border: 'black solid 3px', backgroundColor: 'rgb(232,240,254)', height: '120px'}}
-              placeholder="Leave your review here..."
-              onChange={(e) => {
-                setReview(e.target.value);
-              }}
-            ></textarea>
-          </div>
-          <div>{showSelectedStars()} Stars</div>
-          <div style={{width: '100%'}}>
-            <button
-            className="submitReviewButton"
-            disabled={review.length < 10}
-            style={{marginBottom: '50px', backgroundColor: 'rgb(255,90,95)', width: '94%', marginLeft: '10px', height: '45px', border: 'black 3px solid', boxShadow: '2px 1px 2px 1px black', color: 'white'}}
-              onClick={(e) => {
-                createReview();
-                setShowModal(false);
-              }}
-            >
-              Submit Your Review
-            </button>
+            <div style={{ width: "100%" }}>
+              <textarea
+                style={{
+                  width: "92%",
+                  marginLeft: "10px",
+                  border: "black solid 3px",
+                  backgroundColor: "rgb(232,240,254)",
+                  height: "120px",
+                }}
+                placeholder="Leave your review here..."
+                onChange={(e) => {
+                  setReview(e.target.value);
+                }}
+              ></textarea>
+            </div>
+            <div>{showSelectedStars()} Stars</div>
+            <div style={{ width: "100%" }}>
+              <button
+                className="submitReviewButton"
+                disabled={review.length < 10}
+                style={{
+                  marginBottom: "50px",
+                  backgroundColor: "rgb(255,90,95)",
+                  width: "94%",
+                  marginLeft: "10px",
+                  height: "45px",
+                  border: "black 3px solid",
+                  boxShadow: "2px 1px 2px 1px black",
+                  color: "white",
+                }}
+                onClick={(e) => {
+                  createReview();
+                  setShowModal(false);
+                }}
+              >
+                Submit Your Review
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );
 }
 
 function Reviews(props) {
+  console.log("new props: ", props.re);
   const reviews = props.re;
   const sessionUser = useSelector((state) => state.session.user);
   const spot = useSelector((state) => state.spots.singleSpot);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  console.log("/n/nHELLO");
-  console.log(props);
-  console.log(reviews);
+
   if (!reviews || reviews.length === 0) return <></>;
   return reviews.length > 0 ? (
     <div style={{ display: "flex", flexDirection: "column-reverse" }}>

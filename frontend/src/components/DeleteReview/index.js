@@ -16,12 +16,9 @@ export default function DeleteReview(props) {
           await dispatch(thunkDeleteReview(props.review.id, props.spotId)).then(
             (id) => {
               let data = props.reviewz;
-              console.log("BEFORFE ID", id);
-              console.log("BEFORFE FILTER", data);
               data = data.filter((ele) => {
                 return ele.id !== id;
               });
-              console.log("AFTER FILTER", data);
               props.setReviews(data);
             }
           );

@@ -50,8 +50,6 @@ function SpotForm({ spot }) {
       lat,
     };
 
-    console.log("spot about to subbmit: ", newSpot);
-
     const images = [
       previewImages,
       previewImages2,

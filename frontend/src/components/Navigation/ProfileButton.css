@@ -10,9 +10,9 @@
     background-color: rgb(171, 168, 168);
     border: 3px solid black;
     padding: 10px 30px 10px 25px;
-    position: ;   
+    position: absolute;   
     margin-top: 5px;
-    margin-right: 500px;
+    margin-right: 50px;
     font-size: 120%;
     border: 3px red solid
 }
