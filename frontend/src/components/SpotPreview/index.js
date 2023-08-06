@@ -91,9 +91,7 @@ export default function SpotPreview(props) {
             <button
               className="update"
               onClick={() => {
-                console.log("update button was pushed", spot.id);
                 let reRoute = `/edit/edit/${spot.id}`;
-                console.log(reRoute);
                 history.push(reRoute);
               }}
             >

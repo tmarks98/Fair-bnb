@@ -50,7 +50,8 @@
 
 .submitReviewButton[disabled]{
   margin-top: 12px;
-  background-color: white;
+  background-color: grey !important;
+  cursor: not-allowed;
   color: grey;
   border: red 30px solid;
   box-shadow: 2px 2px 0px grey;

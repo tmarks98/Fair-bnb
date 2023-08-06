@@ -16,3 +16,10 @@
 .errors {
     color: red;
 }
+
+.submitButton:disabled {
+    background-color: grey !important;
+    cursor: not-allowed;
+}
+
+

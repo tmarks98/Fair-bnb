@@ -23,7 +23,7 @@ function Navigation({ isLoaded, inSpot }) {
         <div
           className="navbar"
           style={{
-            justifyContent: inSpot ? "space-around" : "space-between",
+            justifyContent: "space-between",
             marginLeft: "50px",
             marginRight: "50px",
           }}

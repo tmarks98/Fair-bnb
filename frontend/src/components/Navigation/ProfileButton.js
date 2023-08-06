@@ -58,20 +58,12 @@ function ProfileButton({ user }) {
             <div style={{ border: "red 5px solid" }}>
               <li>Hello, {user.username}</li>
               <li>{user.email}</li>
-              <li>
-                <div
-                  onClick={() => {
-                    history.push("/spots/current");
-                  }}
-                >
-                  Manage Spots
-                </div>
-              </li>
-              {/* {isSpotOwner ? (
+              
+              {isSpotOwner ? (
                   <NavLink to="/spots/current">Manage Spots</NavLink>
                 ) : (
                   <NavLink to="/spots/new">Create a New Spot</NavLink>
-                )} */}
+                )}
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>

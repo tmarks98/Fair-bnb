@@ -42,7 +42,6 @@ export const thunkCreateReview = (id, stars, review) => async (dispatch) => {
     });
     if (res.ok) {
       const body = await res.json();
-      console.log("this is the body", body);
       dispatch(actionCreateReview(body));
       return body;
     } else {
@@ -74,16 +73,13 @@ const initialState = {
 };
 
 function spotsReducer(state = initialState, action) {
-  console.log("TYPE: ", action.type);
   let newReviews = [];
   switch (action.type) {
     case GET_REVIEW: {
-      console.log("state1: ", action.review);
       return { ...state, reviews: action.review };
     }
     case CREATE_REVIEW: {
       newReviews = state.reviews ? [...state.reviews] : [];
-      console.log("this is the action", action);
       const newState = { reviews: newReviews };
       const user = { ...state.sessionUser };
       newState.reviews.push(action.review);
@@ -91,7 +87,6 @@ function spotsReducer(state = initialState, action) {
       return newState;
     }
     case DELETE_REVIEW: {
-      console.log("actionnnn", action);
       return { reviews: state.reviews.filter((ele) => ele.id !== action.id) };
     }
     default:

@@ -11,7 +11,6 @@ const month = (date) => {
 };
 
 export default function SpotInfo() {
-  console.log("3");
   const spot = useSelector((state) => state.spots.singleSpot);
   const dispatch = useDispatch();
   const [review, setReview] = useState("");
@@ -212,14 +211,14 @@ export default function SpotInfo() {
         <Reviews re={re} setRe={setRe} />
         <div
           className="outerModal"
-          style={{ display: !showModal ? "none" : "flex" }}
+          style={{ display: !showModal ? "none" : "flex"}}
         >
           <div className="modal">
             <div className="modalTitle">
               <h1>How was your stay?</h1>
             </div>
 
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%"}}>
               <textarea
                 style={{
                   width: "92%",
@@ -236,7 +235,7 @@ export default function SpotInfo() {
               ></textarea>
             </div>
             <div>{showSelectedStars()} Stars</div>
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%"}}>
               <button
                 className="submitReviewButton"
                 disabled={review.length < 10}

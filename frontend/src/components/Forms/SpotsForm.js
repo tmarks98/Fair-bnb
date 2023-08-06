@@ -6,7 +6,6 @@ import "./SpotsForm.css";
 import { useSelector } from "react-redux";
 
 function SpotForm({ spot }) {
-  console.log('2')
   const dispatch = useDispatch();
   const history = useHistory(); //
   const [address, setAddress] = useState(spot?.address ?? "");
@@ -33,10 +32,51 @@ function SpotForm({ spot }) {
   );
   const [errors, setErrors] = useState({});
   const ifExist = spot != null;
-  const dispatchedSpots = useSelector((state) => state.spots.singleSpot);
+  // const dispatchedSpots = useSelector((state) => state.spots.singleSpot);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let err = {};
+    if (!country.length) {
+      err.country = "Country is required";
+    }
+    if (!address.length) {
+      err.address = "Address is required";
+    }
+    if (!city.length) {
+      err.city = "City is required";
+    }
+    if (!state.length) {
+      err.state = "State is required";
+    }
+    if (description.length < 30) {
+      err.description = "Description needs 30 or more characters";
+    }
+    if (!name.length) {
+      err.name = "Name is required";
+    }
+    if (!price.length) {
+      err.price = "Price is required";
+    }
+    if (!validFileType(previewImages)) {
+      err.previewImages = "Preview image is required.";
+    }
+    if (!validFileType(previewImages2)) {
+      err.previewImages2 = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+    if (!validFileType(previewImages3)) {
+      err.previewImages3 = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+    if (!validFileType(previewImages4)) {
+      err.previewImages4 = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+    if (!validFileType(previewImages5)) {
+      err.previewImages5 = "Image URL must end in .png, .jpg, or .jpeg";
+    }
+
+    setErrors(err);
+
+    if(Object.values(errors.length > 0)) return null;
 
     const newSpot = {
       ...spot,
@@ -85,60 +125,6 @@ function SpotForm({ spot }) {
     return hasOne;
   }
 
-  useEffect(() => {
-    let err = {};
-    if (!country.length) {
-      err.country = "Country is required";
-    }
-    if (!address.length) {
-      err.address = "Address is required";
-    }
-    if (!city.length) {
-      err.city = "City is required";
-    }
-    if (!state.length) {
-      err.state = "State is required";
-    }
-    if (description.length < 30) {
-      err.description = "Description needs 30 or more characters";
-    }
-    if (!name.length) {
-      err.name = "Name is required";
-    }
-    if (!price.length) {
-      err.price = "Price is required";
-    }
-    if (!validFileType(previewImages)) {
-      err.previewImages = "Preview image is required.";
-    }
-    if (!validFileType(previewImages2)) {
-      err.previewImages2 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
-    if (!validFileType(previewImages3)) {
-      err.previewImages3 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
-    if (!validFileType(previewImages4)) {
-      err.previewImages4 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
-    if (!validFileType(previewImages5)) {
-      err.previewImages5 = "Image URL must end in .png, .jpg, or .jpeg";
-    }
-
-    setErrors(err);
-  }, [
-    country,
-    address,
-    city,
-    state,
-    description,
-    name,
-    price,
-    previewImages,
-    previewImages2,
-    previewImages3,
-    previewImages4,
-    previewImages5,
-  ]);
 
   return (
     <div className="page"  style={{marginLeft: '30%', marginRight: '30%'}}>
@@ -306,7 +292,7 @@ function SpotForm({ spot }) {
           </label>
           <hr style={{border: '1px grey solid', width: '98%'}}/>
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <button type="submit" className="submitButton" style={{border: 'solid black 3px', boxShadow: '2px 2px 1px 1px black', backgroundColor: 'rgb(255,90,95)', color: 'white'}}>
+          <button type="submit" className="submitButton" disabled={!country && !address && !city && !state && !description && !name && !price && !previewImages} style={{border: 'solid black 3px', boxShadow: '2px 2px 1px 1px black', backgroundColor: 'rgb(255,90,95)', color: 'white'}}>
             Create Spot
           </button>
           </div>

@@ -59,7 +59,6 @@ export const thunkGetCurrentSpots = (spots) => async (dispatch) => {
 
 export const thunkGetSpot = (spotId) => async (dispatch) => {
   try {
-    console.log('spotid: ', spotId)
     const res = await csrfFetch(`/api/spots/${spotId}`);
     if (!res.ok) {
       throw new Error("Failed to get spot");
@@ -124,11 +123,6 @@ export const thunkDeleteSpot = (id) => async (dispatch) => {
   } catch (err) {
     console.log("Failed to delete spot", err);
   }
-
-  const res = await csrfFetch(`/api/spots/${id}`, { method: "DELETE" });
-  if (res.ok) {
-    return dispatch(actionDeleteSpot(id));
-  }
 };
 
 // reducers
@@ -147,7 +141,6 @@ function spotsReducer(state = initialState, action) {
       return { ...state, allSpots: newState };
     }
     case GET_SPOT: {
-      console.log("pew: ", action);
       return { ...state, singleSpot: action.payload };
     }
     case CREATE_SPOT: {
