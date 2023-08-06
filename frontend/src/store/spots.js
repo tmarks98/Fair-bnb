@@ -161,7 +161,7 @@ function spotsReducer(state = initialState, action) {
     case DELETE_SPOT: {
       return {
         ...state,
-        allSpots: { ...state.allSpots, [action.spotId]: null },
+        allSpots: { ...state.allSpots, [action.spotId]: null  },
       };
     }
     default:

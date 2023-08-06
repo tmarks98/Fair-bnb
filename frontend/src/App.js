@@ -30,16 +30,16 @@ function App() {
           <Route exact path={"/"}>
             <LandingPage />
           </Route>
-          <Route eaxct path={"/spots/new"}>
+          <Route path={"/spots/new"}>
             <CreateSpot />
           </Route>
-          <Route exact path={"/spots/current"}>
+          <Route path={"/spots/current"}>
             <ManageSpots />
           </Route>
-          <Route exact path={"/spots/:spotId/edit"}>
+          <Route path={"/edit/edit/:spotId"}>
             <UpdateSpot />
           </Route>
-          <Route exact path={"/spots/:spotId"}>
+          <Route path={"/spots/:spotId"}>
             <SpotInfo />
           </Route>
         </Switch>

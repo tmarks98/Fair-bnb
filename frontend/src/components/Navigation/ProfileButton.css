@@ -7,12 +7,12 @@
 }
 
 .profile-dropdown {
-    background-color: rgb(171, 168, 168);
+    background-color: white;
     border: 3px solid black;
     padding: 10px 30px 10px 25px;
+    width: 100px;
     position: absolute;   
     margin-top: 5px;
-    margin-right: 50px;
-    font-size: 120%;
-    border: 3px red solid
+    font-weight: bold;
+    border-radius: 10px;
 }

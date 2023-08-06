@@ -16,43 +16,102 @@ export default function SpotPreview(props) {
       <div
         className="previewWindow"
         onClick={() => {
-          history.push(`/spots/${id}`);
+          // history.push(`/spots/${id}`);
         }}
         title={spot.name}
       >
-          <img className='images' src={spot.previewImage} alt="Img unavailable at this time" />
-          <div className="allContent" style={{paddingBottom: '5px'}}>
-        <div className="previews">
-          <div className="location" style={{width: '100%'}}>
-            <p style={{fontSize: '20px', margin: '0px', paddingTop: '10px', width: '100%', display: 'flex', justifyContent: 'space-between', paddingLeft: '5px'}}>{spot.city}, {spot.state} <span style={{paddingRight: '5px'}}><i className="fas fa-star" />{spot.avgRating?spot.avgRating.toFixed(2) : "New"}</span></p>
-          </div>
-        </div>
-        <p style={{color: 'grey', fontSize: '16px', margin: '0px', paddingTop: '4px', paddingLeft: '5px'}}>5 miles away</p>
-        <p style={{color: 'grey', fontSize: '16px', margin: '0px', paddingTop: '4px', paddingLeft: '5px'}}>Aug 8-12</p>
-        <p style={{fontSize: '19px', margin: '0px', paddingTop: '6px'}}><span style={{fontWeight: '600', paddingLeft: '5px'}}>${spot.price}</span> night</p>
-      </div>
-      
-      {props.footer ? (
-      <div>
-        <button
-          className="update"
-          onClick={() => history.push(`/spots/${spot.id}/edit`)}span
-        >
-          Update
-        </button>
-        <button
-          className="delete1"
+        <img
+          className="images"
+          src={spot.previewImage}
+          alt="Img unavailable at this time"
           onClick={() => {
-            setDeleteMod(true);
+            history.push(`/spots/${id}`);
+          }}
+        />
+        <div
+          className="allContent"
+          style={{ paddingBottom: "5px" }}
+          onClick={() => {
+            history.push(`/spots/${id}`);
           }}
         >
-          Delete
-        </button>
-      </div>
+          <div className="previews">
+            <div className="location" style={{ width: "100%" }}>
+              <p
+                style={{
+                  fontSize: "20px",
+                  margin: "0px",
+                  paddingTop: "10px",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  paddingLeft: "5px",
+                }}
+              >
+                {spot.city}, {spot.state}{" "}
+                <span style={{ paddingRight: "5px" }}>
+                  <i className="fas fa-star" />
+                  {spot.avgRating ? spot.avgRating.toFixed(2) : "New"}
+                </span>
+              </p>
+            </div>
+          </div>
+          <p
+            style={{
+              color: "grey",
+              fontSize: "16px",
+              margin: "0px",
+              paddingTop: "4px",
+              paddingLeft: "5px",
+            }}
+          >
+            5 miles away
+          </p>
+          <p
+            style={{
+              color: "grey",
+              fontSize: "16px",
+              margin: "0px",
+              paddingTop: "4px",
+              paddingLeft: "5px",
+            }}
+          >
+            Aug 8-12
+          </p>
+          <p style={{ fontSize: "19px", margin: "0px", paddingTop: "6px" }}>
+            <span style={{ fontWeight: "600", paddingLeft: "5px" }}>
+              ${spot.price}
+            </span>{" "}
+            night
+          </p>
+        </div>
+
+        {props.footer ? (
+          <div>
+            <button
+              className="update"
+              onClick={() => {
+                console.log("update button was pushed", spot.id);
+                let reRoute = `/edit/edit/${spot.id}`;
+                console.log(reRoute);
+                history.push(reRoute);
+              }}
+            >
+              Update
+            </button>
+            <button
+              className="delete1"
+              onClick={() => {
+                setDeleteMod(true);
+              }}
+            >
+              Delete
+            </button>
+          </div>
         ) : null}
-      {deleteMod ? (
-        <DeleteSpot spot={spot} setDeleteMod={setDeleteMod} />
-      ) : null}
+        {deleteMod ? (
+          <DeleteSpot spot={spot} setDeleteMod={setDeleteMod} />
+        ) : null}
       </div>
     </>
   );

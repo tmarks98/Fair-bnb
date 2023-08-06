@@ -24,8 +24,8 @@ function Navigation({ isLoaded, inSpot }) {
           className="navbar"
           style={{
             justifyContent: inSpot ? "space-around" : "space-between",
-            marginLeft: "100px",
-            marginRight: "100px",
+            marginLeft: "50px",
+            marginRight: "50px",
           }}
         >
           <div>
@@ -40,7 +40,7 @@ function Navigation({ isLoaded, inSpot }) {
           </div>
           <div
             className="nav"
-            style={{ display: "flex", border: "1px red solid" }}
+            style={{ display: "flex"}}
           >
             <div className="createSpotButton" style={{ paddingRight: "15px" }}>
               {sessionUser && <CreateSpotButton />}

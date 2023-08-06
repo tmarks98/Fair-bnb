@@ -11,6 +11,7 @@ const month = (date) => {
 };
 
 export default function SpotInfo() {
+  console.log("3");
   const spot = useSelector((state) => state.spots.singleSpot);
   const dispatch = useDispatch();
   const [review, setReview] = useState("");
@@ -144,39 +145,54 @@ export default function SpotInfo() {
           </div>
         </div>
       )}
-      <div className="description">
-        <div className="descriptionTitle">
-          {spot.Owner && (
-            <h3>
-              Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
-            </h3>
-          )}
-          <p>{spot.description}</p>
-        </div>
+      {/* style={{display: 'grid', gridTemplateRows: '1fr 1fr'}} */}
+      <div className="descriptionBox">
         <div
-          className="button"
-          style={{ border: "5px black solid", width: "400px" }}
+          className="description"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 400px",
+            gridTemplateRows: "1fr",
+          }}
         >
-          <h2 style={{ paddingLeft: "10px" }}>${spot.price}</h2>
-          <h2 style={{ paddingLeft: "10px" }}>
-            <i className="fas fa-star"></i>
-            {rating.current}
-          </h2>
-          <button
+          <div className="descriptionTitle">
+            {spot.Owner && (
+              <h3>
+                Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
+              </h3>
+            )}
+            <p style={{ paddingRight: "30px" }}>{spot.description}</p>
+          </div>
+          <div
+            className="button"
             style={{
-              paddingLeft: "5px",
-              marginTop: "10px",
-              marginLeft: "10px",
-              marginBottom: "10px",
-              width: "95%",
-              height: "40px",
-              backgroundColor: "rgb(248, 77, 77)",
-              border: "black 3px solid",
-              boxShadow: "2px 2px 2px 1px",
+              border: "5px black solid",
+              width: "400px",
+              height: "185px",
+              marginTop: "60px",
             }}
           >
-            Reserve
-          </button>
+            <h2 style={{ paddingLeft: "10px" }}>${spot.price}</h2>
+            <h2 style={{ paddingLeft: "10px" }}>
+              <i className="fas fa-star"></i>
+              {rating.current}
+            </h2>
+            <button
+              style={{
+                paddingLeft: "5px",
+                marginTop: "10px",
+                marginLeft: "10px",
+                marginBottom: "10px",
+                width: "95%",
+                height: "40px",
+                backgroundColor: "rgb(248, 77, 77)",
+                border: "black 3px solid",
+                boxShadow: "2px 2px 2px 1px",
+              }}
+            >
+              Reserve
+            </button>
+          </div>
         </div>
       </div>
       <hr style={{ marginTop: "40px", marginBottom: "40px", width: "98%" }} />
@@ -251,7 +267,6 @@ export default function SpotInfo() {
 }
 
 function Reviews(props) {
-  console.log("new props: ", props.re);
   const reviews = props.re;
   const sessionUser = useSelector((state) => state.session.user);
   const spot = useSelector((state) => state.spots.singleSpot);

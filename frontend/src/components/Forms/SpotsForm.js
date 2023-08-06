@@ -6,6 +6,7 @@ import "./SpotsForm.css";
 import { useSelector } from "react-redux";
 
 function SpotForm({ spot }) {
+  console.log('2')
   const dispatch = useDispatch();
   const history = useHistory(); //
   const [address, setAddress] = useState(spot?.address ?? "");
