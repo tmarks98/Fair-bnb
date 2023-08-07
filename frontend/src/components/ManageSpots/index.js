@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import SpotPreview from "../SpotPreview/index";
 import { thunkGetCurrentSpots } from "../../store/spots";
 import { useEffect } from "react";
-import CreateSpotButton from "../Forms/CreateSpotButton";
 import "./index.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 

@@ -1,7 +1,7 @@
 {
-  "name": "authenticate-me",
+  "name": "millionaire-bnb",
   "version": "1.0.0",
-  "description": "",
+  "description": "air bnb project",
   "main": "index.js",
   "dependencies": {
     "bcryptjs": "^2.4.3"

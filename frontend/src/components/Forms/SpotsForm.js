@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkCreateSpot, thunkUpdateSpot } from "../../store/spots";
 import "./SpotsForm.css";
-import { useSelector } from "react-redux";
 
 function SpotForm({ spot }) {
   const dispatch = useDispatch();

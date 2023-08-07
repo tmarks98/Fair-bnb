@@ -1,11 +1,9 @@
-import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import CreateSpotButton from "../Forms/CreateSpotButton";
 import {
   useHistory,
-  useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
 
 function Navigation({ isLoaded, inSpot }) {
