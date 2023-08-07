@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
+import validator from "validator";
 import "./SignupForm.css";
 
 function SignupFormModal() {
@@ -17,9 +18,17 @@ function SignupFormModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors({});
-      return dispatch(
+    let errorsArray = [];
+    if (password !== confirmPassword) {
+      errorsArray.push(
+        "Confirm Password field must be the same as the Password field"
+      );
+    }
+    if (!validator.isEmail(email)) {
+      errorsArray.push('Invalid email')
+    }
+    if(!errorsArray.length) {
+      dispatch(
         sessionActions.signup({
           email,
           username,
@@ -35,18 +44,21 @@ function SignupFormModal() {
             setErrors(data.errors);
           }
         });
+    } else {
+      setErrors(errorsArray)
     }
-    return setErrors({
-      confirmPassword:
-        "Confirm Password field must be the same as the Password field",
-    });
-  };
+    }
+    
+    
 
   return (
     <>
       <div className="signUp">
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit} className="signUpForm">
+          <div>{Object.values(errors).map((ele) => (
+            <div style={{fontSize: '87%', color: 'red'}}>{ele}</div>
+          ))}</div>
           <label>
             <input
               className="signUpInputBox3"
@@ -112,7 +124,11 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.confirmPassword && <div style={{fontSize: '80%', color: 'red'}}>{errors.confirmPassword}</div>}
+          {errors.confirmPassword && (
+            <div style={{ fontSize: "80%", color: "red" }}>
+              {errors.confirmPassword}
+            </div>
+          )}
           <button
             className="signUpButton"
             disabled={

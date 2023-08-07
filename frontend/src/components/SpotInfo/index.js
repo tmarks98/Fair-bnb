@@ -182,6 +182,7 @@ export default function SpotInfo() {
                 border: "black 3px solid",
                 boxShadow: "2px 2px 2px 1px",
               }}
+              onClick={() => alert("Feature coming soon")}
             >
               Reserve
             </button>
