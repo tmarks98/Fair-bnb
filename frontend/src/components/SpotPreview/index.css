@@ -15,7 +15,6 @@
 .previews {
     display: flex;
     justify-content: space-between;
-    align-items: end;
     font-weight: bolder;
     /* border: rgb(142, 184, 44) solid 3px; */
 }

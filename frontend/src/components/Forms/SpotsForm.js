@@ -14,8 +14,8 @@ function SpotForm({ spot }) {
   const [name, setName] = useState(spot?.name ?? "");
   const [description, setDescription] = useState(spot?.description ?? "");
   const [price, setPrice] = useState(spot?.price ?? "");
-  const [lng, setLng] = useState(90);
-  const [lat, setLat] = useState(90);
+  const [lng] = useState(90);
+  const [lat] = useState(90);
   const [previewImages, setPreviewImages] = useState(spot?.previewImages ?? "");
   const [previewImages2, setPreviewImages2] = useState(
     spot?.previewImages2 ?? ""

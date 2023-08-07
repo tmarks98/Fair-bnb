@@ -1,7 +1,7 @@
 {
   "name": "millionaire-bnb",
   "version": "1.0.0",
-  "description": "air bnb project",
+  "description": "millionaire-bnb",
   "main": "index.js",
   "dependencies": {
     "bcryptjs": "^2.4.3"
@@ -18,6 +18,6 @@
     "build": "npm run build --prefix backend"
   },
   "keywords": [],
-  "author": "",
+  "author": "tyler",
   "license": "ISC"
 }
