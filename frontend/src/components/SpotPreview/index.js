@@ -51,7 +51,7 @@ export default function SpotPreview(props) {
                 {spot.city}, {spot.state}{" "}
                 <span style={{ paddingRight: "5px" }}>
                   <i className="fas fa-star" />
-                  {spot.avgRating ? spot.avgRating.toFixed(2) : "New"}
+                  {spot.avgRating ? spot.avgRating : "New"}
                 </span>
               </p>
             </div>
