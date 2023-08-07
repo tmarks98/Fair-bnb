@@ -9,7 +9,9 @@ export default function SpotPreview(props) {
   let [deleteMod, setDeleteMod] = useState(false);
   const history = useHistory();
   if (!spot) return null;
-  const spotRating = spot.avgRating.toFixed(2)
+  let spotRating;
+  if(spot.avgRating) spotRating = spot.avgRating.toFixed(2);
+  else spotRating = 'new'
   let id = spot.id;
 
   return (
@@ -52,8 +54,7 @@ export default function SpotPreview(props) {
                 {spot.city}, {spot.state}{" "}
                 <span style={{ paddingRight: "5px" }}>
                   <i className="fas fa-star" />
-                  {spotRating ? spotRating : "New"}
-                  {console.log('spotRating', spotRating)}
+                  {spotRating}
                 </span>
               </p>
             </div>
