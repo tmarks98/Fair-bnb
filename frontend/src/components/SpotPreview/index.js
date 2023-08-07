@@ -8,8 +8,8 @@ export default function SpotPreview(props) {
   let spot = props.spot;
   let [deleteMod, setDeleteMod] = useState(false);
   const history = useHistory();
-  const spotRating = spot?.avgRating?.toFixed(2)
   if (!spot) return null;
+  const spotRating = spot.avgRating.toFixed(2)
   let id = spot.id;
 
   return (
