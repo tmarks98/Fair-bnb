@@ -1,8 +1,8 @@
 import { thunkDeleteSpot, thunkGetCurrentSpots } from "../../store/spots";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./index.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function DeleteSpot(props) {
   const { spotId } = useParams;

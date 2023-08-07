@@ -7,7 +7,6 @@ import LandingPage from "./pages/LandingPage";
 import CreateSpot from "./pages/CreateSpot";
 import ManageSpots from "./components/ManageSpots";
 import UpdateSpot from "./components/UpdateSpot";
-import { thunkGetAllSpots } from "./store/spots";
 import SpotInfo from "./components/SpotInfo";
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
   let path = location.pathname;
   let isSpot =
     path !== "/" && path !== "/spots/new" && path !== "/spots/current";
-  const [inSpot, setInSpot] = useState(isSpot);
+  const [inSpot] = useState(isSpot);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
