@@ -35,7 +35,7 @@ function Navigation({ isLoaded, inSpot }) {
                 src="https://i.ibb.co/jgZzfcH/letter-m-10136703.png"
                 alt=""
               />
-              million-airbnb
+              millionaire-bnb
             </h2>
           </div>
           <div

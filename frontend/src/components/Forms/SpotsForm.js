@@ -58,26 +58,31 @@ function SpotForm({ spot }) {
     if (!price.length) {
       err.price = "Price is required";
     }
-    if (!validFileType(previewImages)) {
+    if(!validFileType(previewImages)) {
+      err.previewImages = 'Preview image must end in .png, .jpg, or .jpeg'
+    }
+    if (!previewImages) {
       err.previewImages = "Preview image is required.";
     }
-    if (!validFileType(previewImages2)) {
+    if (previewImages2 && !validFileType(previewImages2)) {
       err.previewImages2 = "Image URL must end in .png, .jpg, or .jpeg";
     }
-    if (!validFileType(previewImages3)) {
+    if (previewImages3 && !validFileType(previewImages3)) {
       err.previewImages3 = "Image URL must end in .png, .jpg, or .jpeg";
     }
-    if (!validFileType(previewImages4)) {
+    if (previewImages4 && !validFileType(previewImages4)) {
       err.previewImages4 = "Image URL must end in .png, .jpg, or .jpeg";
     }
-    if (!validFileType(previewImages5)) {
+    if (previewImages5 && !validFileType(previewImages5)) {
       err.previewImages5 = "Image URL must end in .png, .jpg, or .jpeg";
     }
-
+    
+    console.log('err: ', err)
     setErrors(err);
 
-    if(Object.values(errors.length > 0)) return null;
-
+    console.log('errors: ', errors)
+    if(Object.values(err).length > 0) return null;
+    
     const newSpot = {
       ...spot,
       address,
@@ -90,7 +95,7 @@ function SpotForm({ spot }) {
       lng,
       lat,
     };
-
+    
     const images = [
       previewImages,
       previewImages2,
@@ -102,7 +107,7 @@ function SpotForm({ spot }) {
     //save the res of dispatch to check for err, historypush if no error, call seterrors
     if (ifExist) {
       dispatch(thunkUpdateSpot(newSpot)).then(() =>
-        history.push(`/spots/${spot.id}`)
+      history.push(`/spots/${spot.id}`)
       );
     } else {
       dispatch(thunkCreateSpot(newSpot, images)).then((id) => {

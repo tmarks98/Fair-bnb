@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { thunkDeleteReview } from "../../store/reviews";
 import { thunkGetSpot } from "../../store/spots";
+import './index.css'
 
 export default function DeleteReview(props) {
   let dispatch = useDispatch();
@@ -11,6 +12,14 @@ export default function DeleteReview(props) {
       <h2>Confirm Delete</h2>
       <p>Are you sure you want to remove this review?</p>
       <button
+      style={{
+        backgroundColor: "rgb(255,90,95)",
+        width: "94%",
+        height: "45px",
+        border: "black 3px solid",
+        boxShadow: "2px 1px 2px 1px black",
+        color: "white",
+      }}
         className="yesButton"
         onClick={async () => {
           props.setShowDeleteModal(false);
@@ -29,6 +38,14 @@ export default function DeleteReview(props) {
         Yes (Delete Review)
       </button>
       <button
+      style={{
+        backgroundColor: "grey",
+        width: "94%",
+        height: "45px",
+        border: "black 3px solid",
+        boxShadow: "2px 1px 2px 1px black",
+        color: "white",
+      }}
         className="noButton"
         onClick={() => {
           props.setShowDeleteModal(false);

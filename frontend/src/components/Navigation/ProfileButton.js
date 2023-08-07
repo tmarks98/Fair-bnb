@@ -14,8 +14,10 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
   let history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const spot = useSelector((state) => state.spots.singleSpot);
-  const isSpotOwner = sessionUser?.id === spot.ownerId;
+  const spots = useSelector((state) => Object.values(state.spots.allSpots))
+  let isSpotOwner;
+  if (sessionUser) isSpotOwner = spots.find((spot) => spot?.ownerId === sessionUser.id);
+
 
   const openMenu = () => {
     if (showMenu) return;
@@ -50,14 +52,14 @@ function ProfileButton({ user }) {
   return (
     <div>
       <button className="profileButton" onClick={openMenu}>
-        <i className="fas fa-user-circle" style={{ border: "2px solid red" }} />
+        <i className="fas fa-user-circle" />
       </button>
       <div>
         <ul className={ulClassName} ref={ulRef}>
-          {user ? (
-            <div style={{ border: "red 5px solid" }}>
-              <li>Hello, {user.username}</li>
-              <li>{user.email}</li>
+          {sessionUser ? (
+            <div>
+              <li>Hello, {sessionUser.username}</li>
+              <li>{sessionUser.email}</li>
               
               {isSpotOwner ? (
                   <NavLink to="/spots/current">Manage Spots</NavLink>

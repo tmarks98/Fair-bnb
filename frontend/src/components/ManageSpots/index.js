@@ -14,6 +14,8 @@ export default function ManageSpots() {
   const usersSpots = spots.filter((spot) => {
     return spot && spot.ownerId === user.id;
   });
+  const sessionUser = useSelector((state) => state.session.user);
+  const isSpotOwner = spots.find((spot) => spot?.ownerId === sessionUser.id);
 
   useEffect(() => {
     dispatch(thunkGetCurrentSpots());
@@ -26,8 +28,8 @@ export default function ManageSpots() {
         marginRight: "50px",
       }}
     >
-      <h2 style={{ height: "10px" }}>Manage Spots</h2>
-      <button
+      <h2 style={{ height: "10px", marginBottom: '30px'}}>Manage Spots</h2>
+      {!isSpotOwner && <button
         style={{
           color: "white",
           backgroundColor: "grey",
@@ -37,7 +39,7 @@ export default function ManageSpots() {
         onClick={() => history.push("/spots/new")}
       >
         Create a New Spot
-      </button>
+      </button>}
       <div className="spots">
         {usersSpots.map((spot) => {
           return <SpotPreview key={spot.id} spot={spot} footer={true} />;

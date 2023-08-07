@@ -92,6 +92,8 @@ export default function SpotInfo() {
     return res;
   };
 
+  // const avgStarRatingFixed = spot.avgStarRating.toFixed(2) ? spot.avgStarRating[2] === '0' && spot.avgStarRating[3] === '0' : spot.avgStarRating.toFixed(2)
+
   return (
     <div
       className="wholePage"
@@ -100,14 +102,6 @@ export default function SpotInfo() {
       <div className="titlee">
         <h2>{spot.name}</h2>
         <p style={{ fontSize: "20px" }}>
-          <span>
-            <i className="fas fa-star" style={{ fontSize: "17px" }}></i>{" "}
-            {spot.avgStarRating} •{" "}
-          </span>
-          <span style={{ textDecoration: "underline" }}>
-            {spot.numReviews} reviews
-          </span>{" "}
-          •{" "}
           <span style={{ textDecoration: "underline" }}>
             {spot.city}, {spot.state}, {spot.country}
           </span>
@@ -171,7 +165,7 @@ export default function SpotInfo() {
               marginTop: "60px",
             }}
           >
-            <h2 style={{ paddingLeft: "10px" }}>${spot.price}</h2>
+            <h2 style={{ paddingLeft: "10px" }}>${spot.price} night</h2>
             <h2 style={{ paddingLeft: "10px" }}>
               <i className="fas fa-star"></i>
               {rating.current}
@@ -194,8 +188,17 @@ export default function SpotInfo() {
           </div>
         </div>
       </div>
-      <hr style={{ marginTop: "40px", marginBottom: "40px", width: "98%" }} />
+      <hr style={{ marginTop: "30px", marginBottom: "30px", width: "99%" }} />
       <div className="reviewArea">
+        <div style={{marginBottom: '15px'}}>
+      <span style={{ fontSize: "150%" }}>
+            <i className="fas fa-star"></i>{" "}
+            {spot.avgStarRating} •{" "}
+          </span>
+          <span style={{ textDecoration: "underline", fontSize: '150%' }}>
+            {spot.numReviews} {reviewWord}
+          </span>{" "}
+          </div>
         {sessionUser && !isOwner && !isReviewed && (
           <button
             className="postReview"
