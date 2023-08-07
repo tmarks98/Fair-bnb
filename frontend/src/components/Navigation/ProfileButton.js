@@ -54,17 +54,17 @@ function ProfileButton({ user }) {
       <button className="profileButton" onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
-      <div>
+      <div className="menuArea" style={{width: '100px'}}>
         <ul className={ulClassName} ref={ulRef}>
           {sessionUser ? (
-            <div>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
               <li>Hello, {sessionUser.username}</li>
               <li>{sessionUser.email}</li>
               
               {isSpotOwner ? (
-                  <NavLink to="/spots/current">Manage Spots</NavLink>
+                  <li><NavLink to="/spots/current">Manage Spots</NavLink></li>
                 ) : (
-                  <NavLink to="/spots/new">Create a New Spot</NavLink>
+                  <li><NavLink to="/spots/new">Create a New Spot</NavLink></li>
                 )}
               <li>
                 <button onClick={logout}>Log Out</button>
