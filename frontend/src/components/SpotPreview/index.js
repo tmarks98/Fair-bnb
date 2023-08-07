@@ -6,11 +6,13 @@ import { useState } from "react";
 
 export default function SpotPreview(props) {
   let spot = props.spot;
+  console.log('spot', spot.avgRating)
   let [deleteMod, setDeleteMod] = useState(false);
   const history = useHistory();
   if (!spot) return null;
   let spotRating;
-  if(spot.avgRating) spotRating = spot.avgRating.toFixed(2);
+  console.log(typeof spot.avgRating)
+  if(spot.avgRating) spotRating = Number(spot.avgRating).toFixed(2);
   else spotRating = 'new'
   let id = spot.id;
 
